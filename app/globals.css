@@ -1,0 +1,516 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * ScopeGuard — "Cosmic Violet".
+ *
+ * The whole product now speaks the landing page's language: a near-black
+ * violet ground (#05030A) with glassy #0B0813 surfaces, hairline white/10
+ * borders, and violet→indigo as the single bold colour, reserved for the
+ * primary action (the gradient-border "cosmic" button) and identity marks.
+ * Dark is the default; .light is the day variant of the same identity (the
+ * toggle and @media print keep it — printed output is always light).
+ *
+ * One deliberate exception survives from the old "Redline" language: the
+ * agreement itself stays paper — the source viewer is a warm cream surface,
+ * the brightest thing on screen in either theme, because the contract is the
+ * artifact under review. The yellow evidence highlight only reads on that
+ * paper, so the panel is theme-invariant on purpose.
+ *
+ * Assessment labels never rely on colour alone: each pairs a distinct glyph
+ * with its full text, so the distinction survives greyscale printing and
+ * colour vision deficiency.
+ */
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Dark (default): the landing's night sky ─────────────────────────── */
+:root {
+  --radius: 0.75rem;
+
+  --background: #05030a;
+  --foreground: #f2f0fa;
+
+  --card: #0b0813;
+  --card-foreground: #f2f0fa;
+  --popover: #150f24;
+  --popover-foreground: #f2f0fa;
+
+  /* Violet — links, focus rings, identity marks. */
+  --primary: #a78bfa;
+  --primary-foreground: #17112b;
+
+  /* Glass: white at whisper opacity, over the night ground. */
+  --secondary: rgb(255 255 255 / 0.05);
+  --secondary-foreground: #e8e6f5;
+
+  --muted: rgb(255 255 255 / 0.04);
+  --muted-foreground: #9896ad;
+
+  --accent: rgb(255 255 255 / 0.07);
+  --accent-foreground: #f2f0fa;
+
+  --destructive: #fb7185;
+  --destructive-foreground: #2b1215;
+
+  --border: rgb(255 255 255 / 0.10);
+  --input: rgb(255 255 255 / 0.16);
+  --ring: #a78bfa;
+
+  /* The cosmic button's near-black fill (see .btn-cosmic below). */
+  --btn-fill: #0b0813;
+  --btn-fill-hover: #171126;
+
+  /* ── Assessment labels (glyph + text, never colour alone) ── */
+  --included-bg: rgb(16 185 129 / 0.10);
+  --included-fg: #6ee7b7;
+  --included-br: rgb(16 185 129 / 0.30);
+
+  --additional-bg: rgb(245 158 11 / 0.10);
+  --additional-fg: #fcd34d;
+  --additional-br: rgb(245 158 11 / 0.30);
+
+  --clarify-bg: rgb(96 165 250 / 0.10);
+  --clarify-fg: #93c5fd;
+  --clarify-br: rgb(96 165 250 / 0.30);
+
+  /* ── Change-request status badges ── */
+  --status-draft-bg: rgb(255 255 255 / 0.05);
+  --status-draft-fg: #a8a6bd;
+  --status-draft-br: rgb(255 255 255 / 0.12);
+  --status-ready-bg: rgb(59 130 246 / 0.12);
+  --status-ready-fg: #93c5fd;
+  --status-ready-br: rgb(59 130 246 / 0.32);
+  --status-sent-bg: rgb(139 92 246 / 0.12);
+  --status-sent-fg: #c4b5fd;
+  --status-sent-br: rgb(139 92 246 / 0.34);
+  --status-approved-bg: rgb(16 185 129 / 0.10);
+  --status-approved-fg: #6ee7b7;
+  --status-approved-br: rgb(16 185 129 / 0.30);
+  --status-declined-bg: rgb(244 63 94 / 0.10);
+  --status-declined-fg: #fda4af;
+  --status-declined-br: rgb(244 63 94 / 0.30);
+
+  /* ── Plain signal colours for inline text and dots ── */
+  --ok: #34d399;
+  --warn: #fbbf24;
+  --danger: #fb7185;
+
+  /* ── Notice surfaces ── */
+  --notice-info-br: rgb(255 255 255 / 0.12);
+  --notice-info-bg: rgb(255 255 255 / 0.04);
+  --notice-info-fg: #c7c9d9;
+  --notice-warn-br: rgb(245 158 11 / 0.30);
+  --notice-warn-bg: rgb(245 158 11 / 0.08);
+  --notice-warn-fg: #fcd34d;
+  --notice-danger-br: rgb(244 63 94 / 0.30);
+  --notice-danger-bg: rgb(244 63 94 / 0.08);
+  --notice-danger-fg: #fda4af;
+  --notice-success-br: rgb(16 185 129 / 0.30);
+  --notice-success-bg: rgb(16 185 129 / 0.08);
+  --notice-success-fg: #6ee7b7;
+
+  /* Selection: violet at its faintest. */
+  --selection: rgb(167 139 250 / 0.25);
+}
+
+/* ── Light: the day variant of the same identity ────────────────────── */
+.light {
+  --background: #f7f6fb;
+  --foreground: #1c1730;
+
+  --card: #ffffff;
+  --card-foreground: #1c1730;
+  --popover: #ffffff;
+  --popover-foreground: #1c1730;
+
+  --primary: #6d28d9;
+  --primary-foreground: #fbfaff;
+
+  --secondary: #efedfa;
+  --secondary-foreground: #3a3352;
+
+  --muted: #f0eef7;
+  --muted-foreground: #6d6a85;
+
+  --accent: #ece7f8;
+  --accent-foreground: #4c1d95;
+
+  --destructive: #b3261e;
+  --destructive-foreground: #ffffff;
+
+  --border: #e6e2f2;
+  --input: #d4cfe6;
+  --ring: #7c3aed;
+
+  /* The cosmic button keeps its night fill in daylight — the brand's one
+     constant across themes. */
+  --btn-fill: #0f0a1e;
+  --btn-fill-hover: #1c1436;
+
+  --included-bg: #eaf9f1;
+  --included-fg: #166a45;
+  --included-br: #b9e4cd;
+
+  --additional-bg: #fdf4e2;
+  --additional-fg: #7a5410;
+  --additional-br: #ecd7a6;
+
+  --clarify-bg: #eaf1fd;
+  --clarify-fg: #2d4e8a;
+  --clarify-br: #c2d6f2;
+
+  --status-draft-bg: #f0eff5;
+  --status-draft-fg: #4c4864;
+  --status-draft-br: #dcd9e7;
+  --status-ready-bg: #eaf1fd;
+  --status-ready-fg: #23539c;
+  --status-ready-br: #c5d8f2;
+  --status-sent-bg: #f1edfd;
+  --status-sent-fg: #5b48a8;
+  --status-sent-br: #d9d3f1;
+  --status-approved-bg: #eaf9f1;
+  --status-approved-fg: #166a45;
+  --status-approved-br: #b9e4cd;
+  --status-declined-bg: #fdeef0;
+  --status-declined-fg: #9a2a35;
+  --status-declined-br: #f0ccd0;
+
+  --ok: #157a4c;
+  --warn: #8a5a0b;
+  --danger: #b3261e;
+
+  --notice-info-br: #ddd9ea;
+  --notice-info-bg: #f2f1f8;
+  --notice-info-fg: #3b374e;
+  --notice-warn-br: #eddcb0;
+  --notice-warn-bg: #fcf6e8;
+  --notice-warn-fg: #6e4a0e;
+  --notice-danger-br: #f0c6cb;
+  --notice-danger-bg: #fbedee;
+  --notice-danger-fg: #8c2530;
+  --notice-success-br: #c4e4d0;
+  --notice-success-bg: #edf7f1;
+  --notice-success-fg: #1e6b40;
+
+  --selection: rgb(109 40 217 / 0.12);
+}
+
+/* ── Token → utility wiring ────────────────────────────────────────────── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-included-bg: var(--included-bg);
+  --color-included-fg: var(--included-fg);
+  --color-included-br: var(--included-br);
+  --color-additional-bg: var(--additional-bg);
+  --color-additional-fg: var(--additional-fg);
+  --color-additional-br: var(--additional-br);
+  --color-clarify-bg: var(--clarify-bg);
+  --color-clarify-fg: var(--clarify-fg);
+  --color-clarify-br: var(--clarify-br);
+
+  --color-status-draft-bg: var(--status-draft-bg);
+  --color-status-draft-fg: var(--status-draft-fg);
+  --color-status-draft-br: var(--status-draft-br);
+  --color-status-ready-bg: var(--status-ready-bg);
+  --color-status-ready-fg: var(--status-ready-fg);
+  --color-status-ready-br: var(--status-ready-br);
+  --color-status-sent-bg: var(--status-sent-bg);
+  --color-status-sent-fg: var(--status-sent-fg);
+  --color-status-sent-br: var(--status-sent-br);
+  --color-status-approved-bg: var(--status-approved-bg);
+  --color-status-approved-fg: var(--status-approved-fg);
+  --color-status-approved-br: var(--status-approved-br);
+  --color-status-declined-bg: var(--status-declined-bg);
+  --color-status-declined-fg: var(--status-declined-fg);
+  --color-status-declined-br: var(--status-declined-br);
+
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+
+  --color-notice-info-br: var(--notice-info-br);
+  --color-notice-info-bg: var(--notice-info-bg);
+  --color-notice-info-fg: var(--notice-info-fg);
+  --color-notice-warn-br: var(--notice-warn-br);
+  --color-notice-warn-bg: var(--notice-warn-bg);
+  --color-notice-warn-fg: var(--notice-warn-fg);
+  --color-notice-danger-br: var(--notice-danger-br);
+  --color-notice-danger-bg: var(--notice-danger-bg);
+  --color-notice-danger-fg: var(--notice-danger-fg);
+  --color-notice-success-br: var(--notice-success-br);
+  --color-notice-success-bg: var(--notice-success-bg);
+  --color-notice-success-fg: var(--notice-success-fg);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, Cambria,
+    "Times New Roman", serif;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
+  }
+
+  .light {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* A visible focus ring everywhere — this is a keyboard-heavy review tool.
+     Component-level rings cover the shadcn primitives; this catches native
+     links, checkboxes, and anything else not yet styled. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background-color: var(--selection);
+  }
+}
+
+@layer components {
+  /*
+   * The primary action — the landing CTA brought into the product. A
+   * near-black fill inside a violet→indigo gradient border, with the glow
+   * landing gives its hero button. Expressed as two stacked backgrounds
+   * (padding-box fill over border-box gradient) so it works on <button>,
+   * <a>, and Slot-wrapped links alike, with no extra wrapper spans.
+   */
+  .btn-cosmic {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--btn-fill), var(--btn-fill)) padding-box,
+      linear-gradient(135deg, #7c3aed, #6366f1) border-box;
+    box-shadow: 0 0 15px rgb(124 58 237 / 0.25);
+  }
+
+  .btn-cosmic:hover {
+    background:
+      linear-gradient(var(--btn-fill-hover), var(--btn-fill-hover)) padding-box,
+      linear-gradient(135deg, #8b5cf6, #6d6ef5) border-box;
+    box-shadow: 0 0 22px rgb(124 58 237 / 0.40);
+  }
+
+  .btn-cosmic:active {
+    background:
+      linear-gradient(var(--btn-fill), var(--btn-fill)) padding-box,
+      linear-gradient(135deg, #7c3aed, #6366f1) border-box;
+  }
+
+  /*
+   * Evidence highlight on the paper document. A left border as well as a
+   * background so the mark survives greyscale printing and colour-blindness.
+   * Theme-invariant on purpose — it lives on the paper, not the chrome.
+   */
+  .evidence-mark {
+    background-color: #fff3c4;
+    box-shadow: inset 3px 0 0 #d99e00;
+    border-radius: 2px;
+    padding: 1px 0;
+    scroll-margin-top: 5rem;
+  }
+
+  .evidence-mark[data-active="true"] {
+    background-color: #ffe27a;
+    box-shadow: inset 3px 0 0 #b37f00;
+  }
+}
+
+/*
+ * The agreement itself stays paper — the one warm surface on a cool desk, the
+ * brightest element on screen in either theme. It shows the document as
+ * written: line breaks preserved, long lines wrapped rather than scrolled,
+ * serif like a contract.
+ */
+.source-text {
+  background-color: #f3f1ea;
+  color: #2c313b;
+  border-radius: 0.375rem;
+  padding: 1rem 1.125rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.source-footer {
+  color: #6d717c;
+}
+
+/* ── Landing page motion ──────────────────────────────────────────────── */
+/*
+ * Reproduces the DOnttakeeverythng reference's framer-motion choreography
+ * with plain CSS: the hero wings' infinite float, staggered mount entrances,
+ * the workflow preview crossfade, and scroll-triggered reveals (driven by
+ * the Reveal component's IntersectionObserver). The wings' keyframes carry
+ * the full transform — translateY(-50%) rotate(45deg) is the resting state,
+ * so the classes on the elements themselves stay transform-free.
+ */
+@keyframes landing-wing-float-up {
+  0%,
+  100% {
+    transform: translateY(-50%) rotate(45deg);
+  }
+  50% {
+    transform: translateY(calc(-50% - 15px)) rotate(45deg);
+  }
+}
+
+@keyframes landing-wing-float-down {
+  0%,
+  100% {
+    transform: translateY(-50%) rotate(45deg);
+  }
+  50% {
+    transform: translateY(calc(-50% + 15px)) rotate(45deg);
+  }
+}
+
+.landing-wing-left {
+  animation: landing-wing-float-up 6s ease-in-out infinite;
+}
+
+.landing-wing-right {
+  /* backwards fill holds the resting keyframe during the 1s delay. */
+  animation: landing-wing-float-down 6s ease-in-out 1s infinite backwards;
+}
+
+@keyframes landing-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.landing-enter {
+  animation: landing-rise 0.6s ease-out both;
+}
+
+@keyframes landing-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.landing-fade-in {
+  animation: landing-fade-in 0.25s ease-out both;
+}
+
+.landing-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.landing-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-wing-left,
+  .landing-wing-right,
+  .landing-enter,
+  .landing-fade-in {
+    animation: none;
+  }
+
+  .landing-wing-left,
+  .landing-wing-right {
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .landing-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media print {
+  /* Printed output is always the light palette, whatever the screen theme. */
+  html,
+  html.light,
+  html.dark {
+    color-scheme: light;
+    --background: #ffffff;
+    --foreground: #1c1730;
+    --card: #ffffff;
+    --card-foreground: #1c1730;
+    --primary: #6d28d9;
+    --primary-foreground: #fbfaff;
+    --secondary: #efedfa;
+    --secondary-foreground: #3a3352;
+    --muted: #f0eef7;
+    --muted-foreground: #6d6a85;
+    --border: #d4cfe6;
+    --input: #d4cfe6;
+    --ring: #7c3aed;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    font-size: 11pt;
+  }
+
+  /* Keep an estimate table from splitting across pages mid-row. */
+  tr,
+  .avoid-break {
+    break-inside: avoid;
+  }
+}

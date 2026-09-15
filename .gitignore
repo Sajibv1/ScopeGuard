@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Environment — never commit real credentials
+.env
+.env.local
+.env*.local
+
+# Local TLS certificates (Slack OAuth on scopeguard.test) — the key file is
+# a private key; regenerate per machine with mkcert, see README.
+/certificates/
+
+# OCR language data — tesseract.js fetches and caches this at runtime
+eng.traineddata
+*.traineddata
+
+# Local scope documents / uploads (never public)
+/storage/
+
+# Eval output
+/eval/results/
+
+# Generated demo assets (source of truth is public/ — these are the local
+# output of scripts/generate-demo-audio.py and slide rendering)
+/demo-audio.mp3
+/slides-images/
+/presentation-slides.html
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Local agent tooling (project-level skills are committed; local settings are not)
+.claude/settings.local.json
+.vercel
